@@ -24,6 +24,11 @@ process now tells a much bigger story.
   were available.
 - The status page acts like a simple health endpoint or release page.
 
+## My Profiles
+
+- GitHub: [github.com/MohammadMoman](https://github.com/MohammadMoman)
+- LinkedIn: [linkedin.com/in/moman-mohammad-25748540b](https://www.linkedin.com/in/moman-mohammad-25748540b/)
+
 ## Why I Built It
 
 I wanted something practical that would let me move from theory to practice. I

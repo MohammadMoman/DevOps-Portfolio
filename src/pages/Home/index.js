@@ -28,8 +28,8 @@ window.createHomePage = function createHomePage() {
             </ul>
             <div class="actions">
               <a class="button" href="#projects">View Projects</a>
-              <a class="button secondary" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-              <a class="button secondary" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a class="button secondary" href="https://github.com/MohammadMoman" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="button secondary" href="https://www.linkedin.com/in/moman-mohammad-25748540b/" target="_blank" rel="noreferrer">LinkedIn</a>
             </div>
           </div>
         </section>
