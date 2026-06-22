@@ -9,9 +9,7 @@ Build metadata generation
   ↓
 Docker image build
   ↓
-Azure App Service deployment
-  ↓
-Portfolio website
+CI artifact ready for review
 ```
 
 ## Application Layout
@@ -26,4 +24,5 @@ Portfolio website
 ## Goal
 
 This repository is still a static website. The DevOps story comes from the
-build and deployment process around it.
+build and validation process around it. The release workflow is documented for
+demonstration even if the Azure resources are not available.
