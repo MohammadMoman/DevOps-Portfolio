@@ -1,20 +1,24 @@
 window.createProjectCard = function createProjectCard(project) {
+  const isPlaceholder = project.title === 'IN PROGRESS';
   const demoLink = project.demoUrl
     ? `<a class="text-link" href="${project.demoUrl}">Live Demo</a>`
-    : '<span class="text-link" aria-disabled="true">Demo Soon</span>';
+    : '';
+  const githubLink = project.githubUrl
+    ? `<a class="text-link" href="${project.githubUrl}" target="_blank" rel="noreferrer">GitHub</a>`
+    : '';
 
   return `
     <article class="card project-card">
       <div class="card-stripe"></div>
       <h3 class="card-heading">${project.title}</h3>
-      <p class="card-text">${project.description}</p>
-      <ul class="tech-list" aria-label="Technologies used">
+      ${isPlaceholder ? '' : `<p class="card-text">${project.description}</p>`}
+      ${isPlaceholder ? '' : `<ul class="tech-list" aria-label="Technologies used">
         ${project.technologies.map((tech) => `<li class="badge">${tech}</li>`).join('')}
-      </ul>
-      <div class="card-actions">
-        <a class="text-link" href="${project.githubUrl}" target="_blank" rel="noreferrer">GitHub</a>
+      </ul>`}
+      ${isPlaceholder ? '' : `<div class="card-actions">
+        ${githubLink}
         ${demoLink}
-      </div>
+      </div>`}
     </article>
   `;
 };

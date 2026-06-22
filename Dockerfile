@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY package.json ./
 COPY index.html status.html aboutme.html ./
+COPY Moman.png ./
 COPY src ./src
 COPY scripts ./scripts
 

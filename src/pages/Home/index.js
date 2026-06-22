@@ -1,5 +1,3 @@
-const stack = ['Azure', 'Terraform', 'Docker', 'Kubernetes', 'GitHub Actions', 'Linux'];
-
 window.createHomePage = function createHomePage() {
   return `
     <div class="site-shell">
@@ -8,7 +6,7 @@ window.createHomePage = function createHomePage() {
         <section class="hero" id="home">
           <div class="char-wrap">
             <div class="floor-glow"></div>
-            <img src="Moman.png" alt="Moman fighter character" />
+            <img src="./Moman.png" alt="Moman fighter character" onerror="this.style.display='none'" />
           </div>
           <div class="hero-content">
             <p class="hero-kicker">Hi, I'm Moman.</p>
@@ -22,10 +20,6 @@ window.createHomePage = function createHomePage() {
               Aspiring DevOps Engineer building a portfolio around cloud fundamentals,
               infrastructure-as-code, containers, and deployment pipelines.
             </p>
-            <p class="tagline">Azure • Terraform • Docker • Kubernetes</p>
-            <ul class="stack-list" aria-label="Technology stack">
-              ${stack.map((item) => `<li class="badge">${item}</li>`).join('')}
-            </ul>
             <div class="actions">
               <a class="button" href="#projects">View Projects</a>
               <a class="button secondary" href="https://github.com/MohammadMoman" target="_blank" rel="noreferrer">GitHub</a>

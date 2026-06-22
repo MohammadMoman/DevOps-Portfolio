@@ -3,10 +3,10 @@ window.createBlogSection = function createBlogSection() {
     <section class="section" id="learning">
       <div class="section-header">
         <p class="section-label">Learning Log</p>
-        <h2 class="section-title">Short technical write-ups</h2>
+        <h2 class="section-title">What I have learnt and done</h2>
         <p class="section-copy">
-          Lightweight notes for the concepts I am practising. No CMS, no drama, just static
-          entries that can grow as the portfolio grows.
+          A simple checkbox-style learning log that shows what I have already
+          practised and what I am still working through.
         </p>
       </div>
       <div class="cards-grid">

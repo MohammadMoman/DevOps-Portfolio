@@ -252,15 +252,6 @@ a {
   color: rgba(205, 232, 255, 0.84);
 }
 
-.tagline {
-  margin-top: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--blue-light);
-}
-
 .divider {
   display: flex;
   align-items: center;
@@ -419,6 +410,48 @@ a {
   color: rgba(205, 232, 255, 0.68);
 }
 
+.check-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 7px 12px;
+  border: 1px solid rgba(90, 180, 255, 0.16);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.check-item.done {
+  color: #b8ffd8;
+  border-color: rgba(105, 255, 173, 0.22);
+}
+
+.check-item.in-progress {
+  color: #ffe3a3;
+  border-color: rgba(255, 227, 163, 0.2);
+}
+
+.check-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: rgba(90, 180, 255, 0.12);
+  font-size: 11px;
+  line-height: 1;
+}
+
+.check-item.done .check-box {
+  background: rgba(105, 255, 173, 0.14);
+}
+
 .card-actions {
   display: flex;
   flex-wrap: wrap;
@@ -438,6 +471,18 @@ a {
 .text-link:hover,
 .text-link:focus-visible {
   color: var(--text);
+}
+
+.project-card .card-text {
+  margin-top: 8px;
+}
+
+.project-card .tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+  list-style: none;
 }
 
 .contact-form {
