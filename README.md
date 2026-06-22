@@ -45,15 +45,6 @@ Azure App Service
 Live Website
 ```
 
-## What The Project Demonstrates
-
-- A static site that runs locally in Docker
-- Environment-driven build metadata
-- GitHub Actions CI for every push
-- A deployment workflow for Azure App Service
-- A status page that behaves like a simple health and build information page
-- A portfolio that is ready to grow into more DevOps and cloud projects
-
 ## My Profiles
 
 - GitHub: [github.com/MohammadMoman](https://github.com/MohammadMoman)
