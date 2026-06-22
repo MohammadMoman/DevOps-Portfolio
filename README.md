@@ -1,17 +1,50 @@
 # Moman | DevOps Portfolio
 
-A static developer portfolio for Mohammad Moman. The site keeps the original
-blue, sci-fi inspired visual identity while adding a cleaner project structure,
-DevOps-focused content, build metadata, Docker support, and a simple status
-page.
+I built this project as a static portfolio that also demonstrates a real
+DevOps workflow.
+
+The website itself is intentionally simple. What I wanted to show was the
+engineering around it: Docker, GitHub Actions, build metadata, environment
+variables, and a deployment flow that could later be connected to Azure.
+
+## What This Project Is
+
+This is my portfolio site, but it has been shaped into a DevOps learning
+project. I built it because I wanted hands-on experience with the theory I had
+been learning around containers, CI/CD, metadata injection, and deployment
+workflows.
+
+The pages are still lightweight and easy to read, while the build and release
+process now tells a much bigger story.
+
+- The site can run locally in Docker.
+- The build exposes version and environment metadata.
+- GitHub Actions validates the code on every push.
+- A deployment workflow shows how I would publish to Azure if the resources
+  were available.
+- The status page acts like a simple health endpoint or release page.
+
+## Why I Built It
+
+I wanted something practical that would let me move from theory to practice. I
+had already learned the concepts around CI/CD, Docker, and cloud deployment, but
+I wanted to apply them to a real project instead of just reading about them.
+
+This portfolio gave me a safe place to do that:
+
+- I could keep the UI simple.
+- I could focus on the delivery process.
+- I could explain every step clearly.
+- I could show versioning, build metadata, and deployment readiness in a way
+  that feels realistic.
 
 ## Pages
 
 - `index.html` - Home, projects, learning log, and contact sections
 - `status.html` - Static health page for CI, build, and release demos
-- `aboutme.html` - Existing personal about page retained from the original site
+- `aboutme.html` - Existing personal about page from the original site
 
-## Structure
+## Repository Structure
 
 - `src/components/` - Small reusable UI and layout renderers
 - `src/data/` - Static project and learning entries
@@ -23,28 +56,22 @@ page.
 - `docs/code-snippets.md` - Explained code snippets from the project
 - `docs/deployment.md` - Azure release notes and workflow overview
 
-## Run Locally
+## Build Metadata
 
-1. Copy `.env.example` to `.env`
-2. Fill in the values you want to show in the UI
-3. Run `docker compose up`
-
-The site will be available at `http://localhost:3000`.
-
-## Build Information
-
-The site reads build values from `window.__BUILD_INFO__`, defined in
+The site reads build values from `window.__BUILD_INFO__`, which is defined in
 `src/config/build-info.js`.
 
-Expected values:
+The values I expose are:
 
 - `version`
 - `buildDate`
 - `commitHash`
 - `environment`
 
-For CI/CD demos, the metadata file is generated from environment variables.
-When running the build script directly, set:
+Those values are generated from environment variables so I can inject the
+current build context during CI/CD instead of hardcoding anything into the app.
+
+When I run the build script manually, I set the values like this:
 
 ```powershell
 $env:APP_VERSION = "v1.0.0"
@@ -54,21 +81,59 @@ $env:APP_ENVIRONMENT = "Production"
 node .\scripts\write-build-info.js
 ```
 
-On GitHub Actions, the workflow passes `github.sha` into `APP_COMMIT_SHA`.
+On GitHub Actions, I pass `github.sha` into `APP_COMMIT_SHA` so the generated
+metadata points back to the exact commit that produced the build.
+
+### Build info file
+
+```javascript
+window.__BUILD_INFO__ = {
+  version: 'v1.0.0',
+  buildDate: '2026-06-22T00:00:00Z',
+  commitHash: 'a1b2c3d',
+  environment: 'Production',
+};
+```
+
+This file is generated during the build. I kept it separate because it makes
+the metadata easy to swap out between local development and CI.
 
 ## CI Flow
 
 ```text
-GitHub
+GitHub push
   ↓
-GitHub Actions
+GitHub Actions CI
   ↓
-Docker Build
+Install dependencies
   ↓
-Build verification artifact
+Run lint and tests
+  ↓
+Build metadata
+  ↓
+Build Docker image
   ↓
 Ready for review
 ```
+
+This is the main CI story for the project. Every push gets checked, and the
+pipeline proves the site can be built in a repeatable way.
+
+### CI workflow example
+
+```yaml
+- name: Install dependencies
+  run: npm install
+
+- name: Run tests
+  run: npm test
+
+- name: Build Docker image
+  run: docker build -t portfolio:${{ github.sha }} .
+```
+
+These steps are intentionally straightforward. I wanted the workflow to feel
+like something I actually wrote while learning, not something over-engineered.
 
 ## CD Flow
 
@@ -77,43 +142,38 @@ GitHub push to main
   ↓
 GitHub Actions deploy workflow
   ↓
-Build metadata generation
+Generate build metadata
   ↓
-Docker image build and push
+Build and push Docker image
   ↓
-Azure App Service update
+Update Azure App Service
   ↓
 Live website
 ```
 
-The CD workflow is documented in [`.github/workflows/deploy.yml`](/c:/Users/moman.mohammad/Desktop/Demi/.github/workflows/deploy.yml).
-It is included for demonstration purposes. If Azure credentials and resources
-are not available, the workflow still shows what the deployment path would look
-like.
+The CD workflow lives in [`.github/workflows/deploy.yml`](/c:/Users/moman.mohammad/Desktop/Demi/.github/workflows/deploy.yml).
+I included it as a realistic example of what I would use if I had the Azure
+resources and secrets available. Even without a live Azure environment, it shows
+the intended release path clearly.
 
 ## What I Learned
 
-This project started as a portfolio and became a DevOps demo. The main things I
-learned were:
+This project started as a portfolio and became a DevOps demo. Along the way, I
+learned how to:
 
-- how to keep the website simple while still making the delivery process more
+- keep the website simple while still making the delivery process look
   professional
-- how to inject build metadata from environment variables instead of hardcoding
-  values
-- how to wire a static site into Docker without turning it into a large app
-- how to make GitHub Actions readable for someone who is still learning CI/CD
-- how to document the deployment path even when I do not have all the Azure
-  resources available
-- how to explain the implementation with code snippets instead of relying on
+- inject build metadata from environment variables instead of hardcoding values
+- package a static site in Docker without overcomplicating it
+- write GitHub Actions that are readable for someone learning CI/CD
+- document a deployment workflow even when I cannot run the cloud side myself
+- explain the implementation with code snippets instead of depending on
   screenshots
-- how to keep the README useful as both project documentation and interview
-  preparation
+- write project docs in a voice that sounds like me
 
 ## Implementation Notes
 
-This section explains the most important parts of the project in plain language.
-The goal is not to show off clever code. The goal is to make the deployment
-story easy to understand.
+I wanted the README to explain what is happening, not just list files.
 
 ### Build metadata generation
 
@@ -125,21 +185,18 @@ const commitHash = process.env.APP_COMMIT_SHA || 'local';
 ```
 
 This is the core idea behind the build info files. The site reads values from
-the environment instead of hardcoding them. That makes the same code work for
+the environment instead of hardcoding them. That means the same code works for
 local development, CI, and a future deployment environment.
 
-### Why the metadata matters
+The metadata matters because it gives me traceability:
 
-The portfolio is still a simple static website, but the metadata makes it feel
-closer to a real release:
-
-- `version` tells you what build is running
-- `environment` tells you whether it is local, development, or production
-- `buildDate` tells you when the artifact was generated
+- `version` tells me what build is running
+- `environment` tells me whether I am looking at local or production values
+- `buildDate` tells me when the artifact was created
 - `commitHash` links the site back to the exact Git commit
 
-That combination is useful for debugging and for interview demos because it
-shows the deployment is traceable.
+That makes debugging easier and also gives the portfolio a more realistic
+release feel.
 
 ### CI Docker build
 
@@ -148,19 +205,20 @@ shows the deployment is traceable.
   run: docker build -t portfolio:${{ github.sha }} .
 ```
 
-This proves the repository can generate a container image on every commit. The
-image itself is not heavily optimized because the project is intentionally
-simple and readable.
+This is the point where the pipeline proves the project can be packaged into a
+container image on every commit. I kept the image build simple on purpose. I did
+not want to introduce extra layers of optimization that would distract from the
+main learning goal.
 
 ### Why Docker is included
 
-Docker is here for two reasons:
+Docker helps the project in two ways:
 
-- it shows how a static app can still participate in a real deployment flow
-- it gives CI something concrete to build, test, and eventually push
+- it shows that a static app can still participate in a real deployment flow
+- it gives CI something concrete to build and eventually deploy
 
-Even though the site is static, packaging it in Docker is a useful DevOps
-exercise.
+Even though the site is static, putting it in Docker is a useful DevOps
+exercise because it mirrors how a lot of production applications are delivered.
 
 ### CD handoff
 
@@ -170,17 +228,33 @@ exercise.
 ```
 
 This is the step that would switch the live site to the new image if the Azure
-resources and secrets were available. The repository keeps this workflow in
-place so the intended release path is documented, even if the real Azure
-subscription is not available yet.
+resources and secrets were available. I kept the workflow in the repository so
+the intended release path is documented, even if I cannot actually run that
+cloud deployment from this environment.
 
-### Why keep the CD workflow if Azure is unavailable?
+### CD workflow example
 
-It helps the project in three ways:
+```yaml
+- name: Log in to Azure Container Registry
+  uses: docker/login-action@v3
 
-- it shows what the release process would be
-- it gives interviewers a realistic deployment example to discuss
-- it makes the repository feel like a project that is ready to grow
+- name: Build and push Docker image
+  run: docker build -t "$IMAGE_NAME:$IMAGE_TAG" -t "$IMAGE_NAME:latest" .
+
+- name: Update Azure App Service container
+  uses: azure/CLI@v2
+```
+
+This is the part that turns a build into a release. The workflow shows the
+exact handoff from GitHub Actions to Azure.
+
+### Why keep the CD workflow?
+
+I think it is still valuable to show the release path because:
+
+- it demonstrates the exact steps I would automate in production
+- it gives interviewers something concrete to ask about
+- it shows the project is ready to grow beyond a local demo
 
 ### Local Docker startup
 
@@ -196,7 +270,44 @@ services:
 This keeps local development easy. There is no extra orchestration layer and no
 unnecessary abstraction.
 
+### Dockerfile
+
+```dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json ./
+COPY index.html status.html aboutme.html ./
+COPY src ./src
+COPY scripts ./scripts
+
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+The Dockerfile is deliberately simple. I wanted it to be easy to follow and
+easy to explain, especially for someone reviewing the repository for the first
+time.
+
+### Status page
+
+```javascript
+window.createStatusPage = function createStatusPage() {
+  const buildInfo = window.getBuildInfo();
+
+  return `
+    <div class="site-shell">
+      ${window.createNavbar()}
+      <main class="status-panel">
+        <p class="status-badge">Healthy</p>
+```
+
+The status page is intentionally minimal. It gives the project a production-like
+health view without adding a backend.
+
 ## Code Snippets
 
-See [docs/code-snippets.md](/c:/Users/moman.mohammad/Desktop/Demi/docs/code-snippets.md)
-for the annotated snippets that explain how the project works.
+The annotated snippets live in
+[docs/code-snippets.md](/c:/Users/moman.mohammad/Desktop/Demi/docs/code-snippets.md).
+I use that file as a short reference for the main implementation ideas.
