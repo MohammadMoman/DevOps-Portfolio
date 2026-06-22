@@ -20,7 +20,7 @@ page.
 - `src/utils/` - Build metadata helper
 - `scripts/` - CI-friendly helper scripts
 - `docs/architecture.md` - Simple architecture diagram
-- `docs/screenshots.md` - Suggested screenshots and proof points
+- `docs/code-snippets.md` - Explained code snippets from the project
 - `docs/deployment.md` - Azure release notes and workflow overview
 
 ## Run Locally
@@ -104,8 +104,16 @@ learned were:
 - how to make GitHub Actions readable for someone who is still learning CI/CD
 - how to document the deployment path even when I do not have all the Azure
   resources available
+- how to explain the implementation with code snippets instead of relying on
+  screenshots
+- how to keep the README useful as both project documentation and interview
+  preparation
 
-## Small Code Snippets
+## Implementation Notes
+
+This section explains the most important parts of the project in plain language.
+The goal is not to show off clever code. The goal is to make the deployment
+story easy to understand.
 
 ### Build metadata generation
 
@@ -117,7 +125,21 @@ const commitHash = process.env.APP_COMMIT_SHA || 'local';
 ```
 
 This is the core idea behind the build info files. The site reads values from
-the environment instead of hardcoding them.
+the environment instead of hardcoding them. That makes the same code work for
+local development, CI, and a future deployment environment.
+
+### Why the metadata matters
+
+The portfolio is still a simple static website, but the metadata makes it feel
+closer to a real release:
+
+- `version` tells you what build is running
+- `environment` tells you whether it is local, development, or production
+- `buildDate` tells you when the artifact was generated
+- `commitHash` links the site back to the exact Git commit
+
+That combination is useful for debugging and for interview demos because it
+shows the deployment is traceable.
 
 ### CI Docker build
 
@@ -126,7 +148,19 @@ the environment instead of hardcoding them.
   run: docker build -t portfolio:${{ github.sha }} .
 ```
 
-This proves the repository can generate a container image on every commit.
+This proves the repository can generate a container image on every commit. The
+image itself is not heavily optimized because the project is intentionally
+simple and readable.
+
+### Why Docker is included
+
+Docker is here for two reasons:
+
+- it shows how a static app can still participate in a real deployment flow
+- it gives CI something concrete to build, test, and eventually push
+
+Even though the site is static, packaging it in Docker is a useful DevOps
+exercise.
 
 ### CD handoff
 
@@ -136,9 +170,33 @@ This proves the repository can generate a container image on every commit.
 ```
 
 This is the step that would switch the live site to the new image if the Azure
-resources and secrets were available.
+resources and secrets were available. The repository keeps this workflow in
+place so the intended release path is documented, even if the real Azure
+subscription is not available yet.
 
-## Screenshots
+### Why keep the CD workflow if Azure is unavailable?
 
-See [docs/screenshots.md](/c:/Users/moman.mohammad/Desktop/Demi/docs/screenshots.md)
-for the recommended screenshots to capture.
+It helps the project in three ways:
+
+- it shows what the release process would be
+- it gives interviewers a realistic deployment example to discuss
+- it makes the repository feel like a project that is ready to grow
+
+### Local Docker startup
+
+```yaml
+services:
+  portfolio:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+```
+
+This keeps local development easy. There is no extra orchestration layer and no
+unnecessary abstraction.
+
+## Code Snippets
+
+See [docs/code-snippets.md](/c:/Users/moman.mohammad/Desktop/Demi/docs/code-snippets.md)
+for the annotated snippets that explain how the project works.
