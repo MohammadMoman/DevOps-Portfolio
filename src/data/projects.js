@@ -6,25 +6,4 @@ window.portfolioProjects = [
     githubUrl: 'https://github.com/',
     demoUrl: './index.html',
   },
-  {
-    title: 'IN PROGRESS',
-    description: 'IN PROGRESS',
-    technologies: [],
-    githubUrl: '',
-    demoUrl: '',
-  },
-  {
-    title: 'IN PROGRESS',
-    description: 'IN PROGRESS',
-    technologies: [],
-    githubUrl: '',
-    demoUrl: '',
-  },
-  {
-    title: 'IN PROGRESS',
-    description: 'IN PROGRESS',
-    technologies: [],
-    githubUrl: '',
-    demoUrl: '',
-  },
 ];

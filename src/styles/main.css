@@ -477,6 +477,51 @@ a {
   margin-top: 8px;
 }
 
+.project-card-coming-soon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 220px;
+  background:
+    radial-gradient(circle at top left, rgba(90, 180, 255, 0.08), transparent 48%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.015));
+  border-color: rgba(90, 180, 255, 0.2);
+}
+
+.coming-soon-badge {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  border: 1px solid rgba(90, 180, 255, 0.2);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  background: rgba(90, 180, 255, 0.08);
+}
+
+.project-card-coming-soon .meta-label {
+  margin-bottom: 12px;
+}
+
+.project-card-coming-soon .card-heading {
+  margin-bottom: 12px;
+}
+
+.project-card-coming-soon .card-text {
+  max-width: 34ch;
+}
+
+.coming-soon-note {
+  margin-top: 14px;
+  color: var(--text-soft);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
 .project-card .tech-list {
   display: flex;
   flex-wrap: wrap;

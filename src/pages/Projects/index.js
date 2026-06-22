@@ -10,7 +10,18 @@ window.createProjectsSection = function createProjectsSection() {
         </p>
       </div>
       <div class="cards-grid">
-        ${window.portfolioProjects.map(window.createProjectCard).join('')}
+        ${window.portfolioProjects.slice(0, 1).map(window.createProjectCard).join('')}
+        <article class="card project-card project-card-coming-soon">
+          <div class="card-stripe"></div>
+          <p class="coming-soon-badge">IN DEVELOPMENT</p>
+          <p class="meta-label">More work is coming</p>
+          <h3 class="card-heading">More projects soon</h3>
+          <p class="card-text">
+            I am still building out the rest of this portfolio.
+            More DevOps, cloud, and infrastructure projects will be added here as they are completed.
+          </p>
+          <p class="coming-soon-note">Next up: cloud builds, infrastructure, and deployment practice.</p>
+        </article>
       </div>
     </section>
   `;
