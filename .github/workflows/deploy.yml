@@ -69,7 +69,9 @@ jobs:
               --name "${{ secrets.AZURE_WEBAPP_NAME }}" \
               --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" \
               --docker-custom-image-name "${{ secrets.AZURE_ACR_LOGIN_SERVER }}/${{ secrets.AZURE_ACR_REPOSITORY }}:${{ github.sha }}" \
-              --docker-registry-server-url "https://${{ secrets.AZURE_ACR_LOGIN_SERVER }}"
+              --docker-registry-server-url "https://${{ secrets.AZURE_ACR_LOGIN_SERVER }}" \
+              --docker-registry-server-user "${{ secrets.AZURE_ACR_USERNAME }}" \
+              --docker-registry-server-password "${{ secrets.AZURE_ACR_PASSWORD }}"
             az webapp config appsettings set \
               --name "${{ secrets.AZURE_WEBAPP_NAME }}" \
               --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" \
