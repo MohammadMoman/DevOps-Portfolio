@@ -19,6 +19,32 @@ I built it because I wanted hands-on experience with the theory I had been learn
 
 The pages stay lightweight and easy to read, but the delivery process now tells a much bigger story.
 
+## Architecture Overview
+
+![Architecture Diagram](./docs/architecture.svg)
+
+## Architecture Summary
+
+- Containerised static portfolio
+- CI/CD with GitHub Actions
+- Docker-based build pipeline
+- Deployment to Azure App Service
+- Image storage in Azure Container Registry
+
+## Architecture Overview
+
+```text
+GitHub
+  ↓
+GitHub Actions
+  ↓
+Azure Container Registry
+  ↓
+Azure App Service
+  ↓
+Live Website
+```
+
 ## What The Project Demonstrates
 
 - A static site that runs locally in Docker
@@ -70,10 +96,10 @@ The site reads build values from `window.__BUILD_INFO__`, which is defined in `s
 
 The values I expose are:
 
-- `version`
-- `buildDate`
-- `commitHash`
-- `environment`
+- `version` - the release or build label
+- `buildDate` - when the artifact was created
+- `commitHash` - the Git commit the build came from
+- `environment` - whether the build is local, development, or production
 
 Those values are generated from environment variables so I can inject the current build context during CI/CD
 instead of hardcoding anything into the app.
@@ -104,6 +130,37 @@ window.__BUILD_INFO__ = {
 
 This file is generated during the build. I kept it separate because it makes the metadata easy to swap
 out between local development and CI.
+
+## Docker
+
+I use Docker here for three reasons:
+
+- it makes the static site portable
+- it gives me a repeatable build target
+- it simulates the kind of packaging step I would use in a real DevOps pipeline
+
+Even though the site is static, putting it in Docker is useful because it mirrors how production
+applications are often delivered and it keeps the build process consistent across machines.
+
+### Docker build example
+
+```dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json ./
+COPY index.html status.html aboutme.html ./
+COPY Moman.png ./
+COPY src ./src
+COPY scripts ./scripts
+
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+The Dockerfile is deliberately simple. I wanted it to be easy to follow and easy to explain, especially for
+someone reviewing the repository for the first time.
 
 ## CI Flow
 
@@ -160,7 +217,7 @@ Provide ACR credentials to App Service
 Live website
 ```
 
-The CD workflow lives in [`.github/workflows/deploy.yml`](/c:/Users/moman.mohammad/Desktop/Demi/.github/workflows/deploy.yml).
+The CD workflow lives in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml).
 It builds the Docker image, pushes it to my Azure Container Registry, updates the App Service to use the
 new image, and makes sure the app service can pull from the private registry with the stored registry
 credentials.
@@ -359,26 +416,6 @@ services:
 
 This keeps local development easy. There is no extra orchestration layer and no unnecessary abstraction.
 
-### Dockerfile
-
-```dockerfile
-FROM node:20-alpine
-
-WORKDIR /app
-
-COPY package.json ./
-COPY index.html status.html aboutme.html ./
-COPY Moman.png ./
-COPY src ./src
-COPY scripts ./scripts
-
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-
-The Dockerfile is deliberately simple. I wanted it to be easy to follow and easy to explain, especially for
-someone reviewing the repository for the first time.
-
 ### Status page
 
 ```javascript
@@ -397,6 +434,5 @@ backend.
 
 ## Code Snippets
 
-The annotated snippets live in
-[docs/code-snippets.md](/c:/Users/moman.mohammad/Desktop/Demi/docs/code-snippets.md).
+The annotated snippets live in [docs/code-snippets.md](./docs/code-snippets.md).
 I use that file as a short reference for the main implementation ideas.
