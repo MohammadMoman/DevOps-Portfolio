@@ -1,0 +1,12 @@
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      APP_VERSION: ${APP_VERSION}
+      APP_ENVIRONMENT: ${APP_ENVIRONMENT}
+      APP_BUILD_DATE: ${APP_BUILD_DATE}
+      APP_COMMIT_SHA: ${APP_COMMIT_SHA}
