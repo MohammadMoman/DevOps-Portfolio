@@ -153,13 +153,15 @@ Build and push Docker image
   ↓
 Update Azure App Service
   ↓
+Provide ACR credentials to App Service
+  ↓
 Live website
 ```
 
 The CD workflow lives in [`.github/workflows/deploy.yml`](/c:/Users/moman.mohammad/Desktop/Demi/.github/workflows/deploy.yml).
-I included it as a realistic example of what I would use if I had the Azure
-resources and secrets available. Even without a live Azure environment, it shows
-the intended release path clearly.
+It builds the Docker image, pushes it to my Azure Container Registry, updates
+the App Service to use the new image, and makes sure the app service can pull
+from the private registry with the stored registry credentials.
 
 ## What I Learned
 
