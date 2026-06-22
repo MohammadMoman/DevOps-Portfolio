@@ -1,6 +1,6 @@
 const fallbackBuildInfo = {
   version: 'Local build',
-  buildDate: 'Local development',
+  buildDate: new Date().toISOString(),
   commitHash: 'local',
   environment: 'Development',
 };
@@ -14,4 +14,18 @@ window.getBuildInfo = function getBuildInfo() {
     commitHash: injected.commitHash || fallbackBuildInfo.commitHash,
     environment: injected.environment || fallbackBuildInfo.environment,
   };
+};
+
+window.formatBuildDate = function formatBuildDate(value) {
+  const parsed = new Date(value);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  }).format(parsed);
 };

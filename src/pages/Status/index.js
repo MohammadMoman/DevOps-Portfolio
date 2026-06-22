@@ -22,7 +22,7 @@ window.createStatusPage = function createStatusPage() {
             </div>
             <div class="status-row">
               <span>Built</span>
-              <strong>${buildInfo.buildDate}</strong>
+              <strong>${window.formatBuildDate(buildInfo.buildDate)}</strong>
             </div>
             <div class="status-row">
               <span>Commit Hash</span>
