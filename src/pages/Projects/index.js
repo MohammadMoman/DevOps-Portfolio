@@ -18,9 +18,9 @@ window.createProjectsSection = function createProjectsSection() {
           <h3 class="card-heading">More projects soon</h3>
           <p class="card-text">
             I am still building out the rest of this portfolio.
-            More DevOps, cloud, and infrastructure projects will be added here as they are completed.
+            More DevOps, cloud, and infrastructure work will appear here as each project takes shape.
           </p>
-          <p class="coming-soon-note">Next up: cloud builds, infrastructure, and deployment practice.</p>
+          <p class="coming-soon-note">Next up: cloud builds, infrastructure, and deployment experiments.</p>
         </article>
       </div>
     </section>
