@@ -23,11 +23,15 @@ Live Website
 - Deploy the image to Azure App Service
 - Pass `APP_VERSION`, `APP_ENVIRONMENT`, `APP_BUILD_DATE`, and
   `APP_COMMIT_SHA` as app settings or secrets
+- Use `.github/workflows/deploy.yml` to build, push, and deploy on `main`
 
 ## Placeholder Secrets
 
 - `AZURE_CREDENTIALS`
-- `AZURE_CONTAINER_REGISTRY_NAME`
+- `AZURE_ACR_LOGIN_SERVER`
+- `AZURE_ACR_USERNAME`
+- `AZURE_ACR_PASSWORD`
+- `AZURE_ACR_REPOSITORY`
 - `AZURE_WEBAPP_NAME`
 - `AZURE_RESOURCE_GROUP`
 - `APP_VERSION`
@@ -37,5 +41,5 @@ Live Website
 
 ## Notes
 
-Deployment is not automated yet. The repository is only prepared for a future
-release step.
+Deployment is automated for `main` through GitHub Actions, but the Azure
+resources still need to be created and connected with secrets.

@@ -69,3 +69,21 @@ Azure App Service
   ↓
 Live Website
 ```
+
+## CD Setup
+
+Deployment runs from [`.github/workflows/deploy.yml`](/c:/Users/moman.mohammad/Desktop/Demi/.github/workflows/deploy.yml)
+when changes land on `main`.
+
+You will need these repository secrets in GitHub:
+
+- `AZURE_CREDENTIALS`
+- `AZURE_ACR_LOGIN_SERVER`
+- `AZURE_ACR_USERNAME`
+- `AZURE_ACR_PASSWORD`
+- `AZURE_ACR_REPOSITORY`
+- `AZURE_WEBAPP_NAME`
+- `AZURE_RESOURCE_GROUP`
+
+The workflow builds a Docker image, pushes it to Azure Container Registry, and
+then tells Azure App Service to run the new image.
