@@ -1,0 +1,46 @@
+const stack = ['Azure', 'Terraform', 'Docker', 'Kubernetes', 'GitHub Actions', 'Linux'];
+
+window.createHomePage = function createHomePage() {
+  return `
+    <div class="site-shell">
+      ${window.createNavbar()}
+      <main>
+        <section class="hero" id="home">
+          <div class="char-wrap">
+            <div class="floor-glow"></div>
+            <img src="Moman.png" alt="Moman fighter character" />
+          </div>
+          <div class="hero-content">
+            <p class="hero-kicker">Hi, I'm Moman.</p>
+            <h1 class="name">MOHAMMAD MOMAN</h1>
+            <div class="divider">
+              <div class="div-line"></div>
+              <div class="div-dot"></div>
+              <div class="div-line"></div>
+            </div>
+            <p class="hero-intro">
+              Aspiring DevOps Engineer building a portfolio around cloud fundamentals,
+              infrastructure-as-code, containers, and deployment pipelines.
+            </p>
+            <p class="tagline">Azure • Terraform • Docker • Kubernetes</p>
+            <ul class="stack-list" aria-label="Technology stack">
+              ${stack.map((item) => `<li class="badge">${item}</li>`).join('')}
+            </ul>
+            <div class="actions">
+              <a class="button" href="#projects">View Projects</a>
+              <a class="button secondary" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="button secondary" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+          </div>
+        </section>
+        ${window.createProjectsSection()}
+        ${window.createBlogSection()}
+        ${window.createContactSection()}
+      </main>
+      <footer class="site-footer">
+        <p>Built by Moman for DevOps practice, portfolio growth, and future CI/CD demos.</p>
+        ${window.createBuildInfo()}
+      </footer>
+    </div>
+  `;
+};
