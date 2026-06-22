@@ -1,8 +1,8 @@
 import { writeFileSync } from 'node:fs';
 
-const version = process.env.APP_VERSION || 'Not set';
+const version = process.env.APP_VERSION || 'Local build';
 const environment = process.env.APP_ENVIRONMENT || 'Development';
-const buildDate = process.env.APP_BUILD_DATE || 'Not set';
+const buildDate = process.env.APP_BUILD_DATE || 'Local development';
 const commitHash = process.env.APP_COMMIT_SHA || 'local';
 
 const content = `window.__BUILD_INFO__ = {

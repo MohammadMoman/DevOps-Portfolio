@@ -1,6 +1,6 @@
 const fallbackBuildInfo = {
-  version: 'Not set',
-  buildDate: 'Not set',
+  version: 'Local build',
+  buildDate: 'Local development',
   commitHash: 'local',
   environment: 'Development',
 };

@@ -1,6 +1,6 @@
 window.__BUILD_INFO__ = {
-  version: 'Not set',
-  buildDate: 'Not set',
+  version: 'Local build',
+  buildDate: 'Local development',
   commitHash: 'local',
   environment: 'Development',
 };
