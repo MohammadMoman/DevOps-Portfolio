@@ -684,9 +684,14 @@ a {
 
 .architecture-hero-content {
   max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
   position: relative;
   z-index: 1;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .architecture-title {
