@@ -29,7 +29,6 @@ window.createHomePage = function createHomePage() {
         </section>
         ${window.createProjectsSection()}
         ${window.createBlogSection()}
-        ${window.createContactSection()}
       </main>
       <footer class="site-footer">
         <p>Built by Moman for DevOps practice, portfolio growth, and future CI/CD demos.</p>

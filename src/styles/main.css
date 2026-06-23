@@ -154,6 +154,11 @@ a {
   text-shadow: 0 0 12px rgba(90, 180, 255, 0.7);
 }
 
+.nav-active {
+  color: var(--text) !important;
+  text-shadow: 0 0 12px rgba(90, 180, 255, 0.7);
+}
+
 .hero {
   display: grid;
   grid-template-columns: minmax(240px, 380px) 1fr;
@@ -647,6 +652,118 @@ a {
   font-size: 13px;
 }
 
+.architecture-hero {
+  min-height: auto;
+  padding-top: 18px;
+}
+
+.architecture-hero-content {
+  max-width: 860px;
+}
+
+.architecture-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.pipeline-flow {
+  display: grid;
+  gap: 14px;
+}
+
+.pipeline-card {
+  max-width: 100%;
+}
+
+.pipeline-arrow {
+  display: grid;
+  place-items: center;
+  width: fit-content;
+  margin-left: 16px;
+  color: var(--blue-light);
+  font-size: 26px;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(90, 180, 255, 0.4);
+}
+
+.architecture-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.timeline-list {
+  display: grid;
+  gap: 12px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(90, 180, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text-soft);
+}
+
+.timeline-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(90, 180, 255, 0.2);
+  color: var(--blue-light);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  background: rgba(90, 180, 255, 0.08);
+}
+
+.metadata-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.metadata-card {
+  min-height: 150px;
+}
+
+.architecture-statement {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+}
+
+.release-notes-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.release-note-card {
+  min-height: 170px;
+}
+
+.release-note-card .card-heading {
+  font-size: 17px;
+}
+
+.architecture-link-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.architecture-link-card .card-text {
+  margin-bottom: 16px;
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(22px); }
   to { opacity: 1; transform: translateY(0); }
@@ -691,5 +808,22 @@ a {
 
   .cards-grid {
     grid-template-columns: 1fr;
+  }
+
+  .architecture-grid,
+  .metadata-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .release-notes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pipeline-arrow {
+    margin-left: 6px;
+  }
+
+  .timeline-item {
+    align-items: flex-start;
   }
 }
