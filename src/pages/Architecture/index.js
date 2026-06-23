@@ -98,22 +98,9 @@ window.createArchitecturePage = function createArchitecturePage() {
               </p>
               <div class="architecture-actions">
                 <button class="button" type="button" data-open-architecture-diagram>Show Diagram</button>
-                <a class="button secondary" href="./docs/architecture.md" target="_blank" rel="noreferrer">Read Notes</a>
+                <button class="button secondary" type="button" data-open-architecture-notes>Read Notes</button>
               </div>
             </div>
-            <aside class="card architecture-link-card">
-              <div class="card-stripe"></div>
-              <p class="meta-label">Quick View</p>
-              <h3 class="card-heading">What this section shows</h3>
-              <p class="card-text">
-                The SVG gives the big-picture flow. The cards below break down the same route into the
-                practical steps I used while shaping the delivery flow and build process.
-              </p>
-              <div class="card-actions">
-                <button class="text-link text-button" type="button" data-open-architecture-diagram>Open diagram</button>
-                <button class="text-link text-button" type="button" data-open-architecture-notes>Open notes</button>
-              </div>
-            </aside>
           </div>
           <div class="pipeline-flow" aria-label="Architecture flow">
             ${architectureStages.map((stage, index) => `
