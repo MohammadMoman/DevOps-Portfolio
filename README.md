@@ -33,20 +33,6 @@ The pages stay lightweight and easy to read, but the delivery process now tells 
 - Deployment to Azure App Service
 - Image storage in Azure Container Registry
 
-## Architecture Overview
-
-```text
-GitHub
-  ↓
-GitHub Actions
-  ↓
-Azure Container Registry
-  ↓
-Azure App Service
-  ↓
-Live Website
-```
-
 ## My Profiles
 
 - GitHub: [github.com/MohammadMoman](https://github.com/MohammadMoman)
