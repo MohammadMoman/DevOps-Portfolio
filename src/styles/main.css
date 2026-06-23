@@ -661,10 +661,11 @@ a {
 .architecture-hero::before {
   content: '';
   position: absolute;
-  inset: 0 auto auto 0;
-  width: min(540px, 70vw);
+  inset: 0 auto auto 50%;
+  width: min(640px, 85vw);
   height: 100%;
-  background: radial-gradient(circle at 20% 18%, rgba(90, 180, 255, 0.08), transparent 62%);
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 50% 18%, rgba(90, 180, 255, 0.08), transparent 62%);
   pointer-events: none;
 }
 
@@ -672,16 +673,20 @@ a {
   max-width: 860px;
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 
 .architecture-title {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 11ch;
-  font-size: clamp(46px, 6.5vw, 82px);
+  width: fit-content;
+  max-width: none;
+  margin: 0 auto;
+  font-size: clamp(44px, 6vw, 78px);
   letter-spacing: 0.08em;
   line-height: 0.92;
+  align-items: center;
 }
 
 .architecture-title span:last-child {
@@ -692,6 +697,8 @@ a {
 
 .architecture-hero-content .hero-intro {
   max-width: 56ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .architecture-actions {
@@ -699,6 +706,7 @@ a {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 24px;
+  justify-content: center;
 }
 
 .architecture-diagram-layout {
@@ -713,6 +721,7 @@ a {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 22px;
+  justify-content: center;
 }
 
 .pipeline-flow {
@@ -945,7 +954,6 @@ a {
   }
 
   .architecture-title {
-    max-width: none;
     align-items: center;
   }
 }
