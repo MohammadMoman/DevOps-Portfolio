@@ -661,6 +661,26 @@ a {
   max-width: 860px;
 }
 
+.architecture-title {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 11ch;
+  font-size: clamp(46px, 6.5vw, 82px);
+  letter-spacing: 0.08em;
+  line-height: 0.92;
+}
+
+.architecture-title span:last-child {
+  font-size: 0.74em;
+  letter-spacing: 0.12em;
+  color: var(--blue-light);
+}
+
+.architecture-hero-content .hero-intro {
+  max-width: 56ch;
+}
+
 .architecture-actions {
   display: flex;
   flex-wrap: wrap;
@@ -678,6 +698,7 @@ a {
 .pipeline-flow {
   display: grid;
   gap: 14px;
+  max-width: 920px;
 }
 
 .pipeline-card {
@@ -707,8 +728,8 @@ a {
 .timeline-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
+  gap: 18px;
+  padding: 18px 18px;
   border: 1px solid rgba(90, 180, 255, 0.12);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.025);
@@ -719,8 +740,8 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  height: 44px;
+  min-width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1px solid rgba(90, 180, 255, 0.2);
   color: var(--blue-light);
@@ -744,10 +765,12 @@ a {
 
 .release-notes-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
 }
 
 .release-note-card {
-  min-height: 170px;
+  min-height: 156px;
+  padding: 26px 24px;
 }
 
 .release-note-card .card-heading {
@@ -825,5 +848,10 @@ a {
 
   .timeline-item {
     align-items: flex-start;
+  }
+
+  .architecture-title {
+    max-width: none;
+    align-items: center;
   }
 }

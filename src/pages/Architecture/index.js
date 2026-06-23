@@ -68,7 +68,10 @@ window.createArchitecturePage = function createArchitecturePage() {
         <section class="hero architecture-hero">
           <div class="hero-content architecture-hero-content">
             <p class="hero-kicker">Engineering View</p>
-            <h1 class="name">Architecture &amp; Delivery Pipeline</h1>
+            <h1 class="name architecture-title">
+              <span>Architecture</span>
+              <span>Delivery Pipeline</span>
+            </h1>
             <div class="divider">
               <div class="div-line"></div>
               <div class="div-dot"></div>
