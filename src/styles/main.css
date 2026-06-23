@@ -655,10 +655,23 @@ a {
 .architecture-hero {
   min-height: auto;
   padding-top: 18px;
+  position: relative;
+}
+
+.architecture-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: min(540px, 70vw);
+  height: 100%;
+  background: radial-gradient(circle at 20% 18%, rgba(90, 180, 255, 0.08), transparent 62%);
+  pointer-events: none;
 }
 
 .architecture-hero-content {
   max-width: 860px;
+  position: relative;
+  z-index: 1;
 }
 
 .architecture-title {
@@ -688,6 +701,13 @@ a {
   margin-top: 24px;
 }
 
+.architecture-diagram-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.8fr);
+  gap: 18px;
+  align-items: start;
+}
+
 .badge-row {
   display: flex;
   flex-wrap: wrap;
@@ -697,12 +717,45 @@ a {
 
 .pipeline-flow {
   display: grid;
-  gap: 14px;
+  gap: 16px;
   max-width: 920px;
+  position: relative;
+  padding-left: 12px;
 }
 
 .pipeline-card {
   max-width: 100%;
+}
+
+.pipeline-step {
+  position: relative;
+  padding-left: 20px;
+}
+
+.pipeline-step::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 12px rgba(90, 180, 255, 0.65);
+}
+
+.pipeline-step::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 34px;
+  width: 2px;
+  height: calc(100% + 2px);
+  background: linear-gradient(180deg, rgba(90, 180, 255, 0.35), rgba(90, 180, 255, 0.06));
+}
+
+.pipeline-step:last-child::after {
+  display: none;
 }
 
 .pipeline-arrow {
@@ -723,6 +776,21 @@ a {
 .timeline-list {
   display: grid;
   gap: 12px;
+}
+
+.timeline-stepper {
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline-stepper::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(90, 180, 255, 0.34), rgba(90, 180, 255, 0.06));
 }
 
 .timeline-item {
@@ -749,6 +817,18 @@ a {
   font-weight: 700;
   letter-spacing: 0.1em;
   background: rgba(90, 180, 255, 0.08);
+}
+
+.timeline-copy {
+  display: grid;
+  gap: 5px;
+}
+
+.timeline-step-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
 .metadata-grid {
@@ -781,6 +861,8 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 100%;
+  background: linear-gradient(180deg, rgba(90, 180, 255, 0.08), rgba(255, 255, 255, 0.015));
 }
 
 .architecture-link-card .card-text {
@@ -838,6 +920,10 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .architecture-diagram-layout {
+    grid-template-columns: 1fr;
+  }
+
   .release-notes-grid {
     grid-template-columns: 1fr;
   }
@@ -848,6 +934,14 @@ a {
 
   .timeline-item {
     align-items: flex-start;
+  }
+
+  .timeline-stepper {
+    padding-left: 14px;
+  }
+
+  .timeline-stepper::before {
+    left: 13px;
   }
 
   .architecture-title {

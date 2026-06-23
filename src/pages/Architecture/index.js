@@ -88,27 +88,43 @@ window.createArchitecturePage = function createArchitecturePage() {
         </section>
 
         <section class="section">
-          <div class="section-header">
-            <p class="section-label">Architecture Diagram</p>
-            <h2 class="section-title">Release path</h2>
-            <p class="section-copy">
-              The pipeline starts in GitHub, moves through CI/CD in GitHub Actions, stores images in
-              Azure Container Registry, and deploys to Azure App Service before reaching the live website.
-            </p>
-            <div class="architecture-actions">
-              <a class="button" href="./docs/architecture.svg" target="_blank" rel="noreferrer">Open SVG Diagram</a>
-              <a class="button secondary" href="./docs/architecture.md" target="_blank" rel="noreferrer">Read Notes</a>
+          <div class="architecture-diagram-layout">
+            <div class="section-header">
+              <p class="section-label">Architecture Diagram</p>
+              <h2 class="section-title">Release path</h2>
+              <p class="section-copy">
+                The pipeline starts in GitHub, moves through CI/CD in GitHub Actions, stores images in
+                Azure Container Registry, and deploys to Azure App Service before reaching the live website.
+              </p>
+              <div class="architecture-actions">
+                <a class="button" href="./docs/architecture.svg" target="_blank" rel="noreferrer">Open SVG Diagram</a>
+                <a class="button secondary" href="./docs/architecture.md" target="_blank" rel="noreferrer">Read Notes</a>
+              </div>
             </div>
+            <aside class="card architecture-link-card">
+              <div class="card-stripe"></div>
+              <p class="meta-label">Quick View</p>
+              <h3 class="card-heading">What this section shows</h3>
+              <p class="card-text">
+                The SVG gives the big-picture flow. The cards below break down the same route into the
+                practical steps I use when explaining the project in interviews.
+              </p>
+              <div class="card-actions">
+                <a class="text-link" href="./docs/architecture.svg" target="_blank" rel="noreferrer">Open diagram</a>
+                <a class="text-link" href="./docs/architecture.md" target="_blank" rel="noreferrer">Read notes</a>
+              </div>
+            </aside>
           </div>
           <div class="pipeline-flow" aria-label="Architecture flow">
             ${architectureStages.map((stage, index) => `
-              <article class="card pipeline-card">
-                <div class="card-stripe"></div>
-                <p class="meta-label">Stage ${index + 1}</p>
-                <h3 class="card-heading">${stage.title}</h3>
-                <p class="card-text">${stage.text}</p>
-              </article>
-              ${index < architectureStages.length - 1 ? '<div class="pipeline-arrow" aria-hidden="true">↓</div>' : ''}
+              <div class="pipeline-step">
+                <article class="card pipeline-card">
+                  <div class="card-stripe"></div>
+                  <p class="meta-label">Stage ${index + 1}</p>
+                  <h3 class="card-heading">${stage.title}</h3>
+                  <p class="card-text">${stage.text}</p>
+                </article>
+              </div>
             `).join('')}
           </div>
         </section>
@@ -154,11 +170,14 @@ window.createArchitecturePage = function createArchitecturePage() {
             <p class="section-label">Deployment Flow</p>
             <h2 class="section-title">How a release moves</h2>
           </div>
-          <div class="timeline-list">
+          <div class="timeline-list timeline-stepper">
             ${deploymentSteps.map((step, index) => `
               <div class="timeline-item">
                 <div class="timeline-marker">${String(index + 1).padStart(2, '0')}</div>
-                <p>${step}</p>
+                <div class="timeline-copy">
+                  <p class="timeline-step-label">Step ${String(index + 1).padStart(2, '0')}</p>
+                  <p>${step}</p>
+                </div>
               </div>
             `).join('')}
           </div>
