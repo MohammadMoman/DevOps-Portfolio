@@ -19,7 +19,6 @@ const server = createServer(async (req, res) => {
     '/': '/index.html',
     '/status': '/status.html',
     '/architecture': '/architecture.html',
-    '/about': '/aboutme.html',
   };
   const pathname = routeMap[url.pathname] || url.pathname;
   const filePath = resolve(rootDir, `.${pathname}`);

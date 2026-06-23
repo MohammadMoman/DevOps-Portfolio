@@ -42,7 +42,6 @@ The pages stay lightweight and easy to read, but the delivery process now tells 
 
 - `index.html` - Home, projects, learning log, and contact sections
 - `status.html` - Static health page for CI, build, and release demos
-- `aboutme.html` - Existing personal about page from the original site
 
 ## Repository Structure
 
@@ -129,7 +128,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package.json ./
-COPY index.html status.html aboutme.html ./
+COPY index.html status.html architecture.html ./
 COPY Moman.png ./
 COPY src ./src
 COPY scripts ./scripts
