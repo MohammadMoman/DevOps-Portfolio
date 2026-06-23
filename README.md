@@ -1,6 +1,6 @@
 # Moman | DevOps Portfolio
 
-Live Website: [Visit the portfolio](https://moman-portfolio-app-a4hueuatd3d8e5f2.ukwest-01.azurewebsites.net)
+Live Website: [CLICK ME!](https://moman-portfolio-app-a4hueuatd3d8e5f2.ukwest-01.azurewebsites.net)
 
 I built this project as a static portfolio that also demonstrates a real DevOps workflow.
 
