@@ -802,16 +802,17 @@ a {
 
 .timeline-stepper {
   position: relative;
-  padding-left: 20px;
+  padding: 8px 0;
 }
 
 .timeline-stepper::before {
   content: '';
   position: absolute;
-  left: 19px;
-  top: 0;
-  bottom: 0;
+  left: 50%;
+  top: 20px;
+  bottom: 20px;
   width: 2px;
+  transform: translateX(-50%);
   background: linear-gradient(180deg, rgba(90, 180, 255, 0.34), rgba(90, 180, 255, 0.06));
 }
 
@@ -819,11 +820,24 @@ a {
   display: flex;
   align-items: center;
   gap: 18px;
-  padding: 18px 18px;
+  width: calc(50% - 28px);
+  padding: 18px;
   border: 1px solid rgba(90, 180, 255, 0.12);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.025);
   color: var(--text-soft);
+}
+
+.timeline-item-left {
+  margin-right: auto;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.timeline-item-right {
+  margin-left: auto;
+  flex-direction: row-reverse;
+  text-align: left;
 }
 
 .timeline-marker {
@@ -846,11 +860,29 @@ a {
   gap: 5px;
 }
 
+.timeline-item-left .timeline-copy {
+  justify-items: end;
+}
+
+.timeline-item-right .timeline-copy {
+  justify-items: start;
+}
+
 .timeline-step-label {
   color: var(--text-muted);
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+}
+
+.timeline-connector {
+  width: 100%;
+  text-align: center;
+  color: var(--blue-light);
+  font-size: 20px;
+  line-height: 1;
+  margin: -2px 0;
+  text-shadow: 0 0 12px rgba(90, 180, 255, 0.35);
 }
 
 .metadata-grid {
@@ -971,6 +1003,20 @@ a {
   height: auto;
 }
 
+.architecture-notes-panel {
+  width: min(1040px, 100%);
+}
+
+.architecture-notes-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.architecture-note-card {
+  min-height: 180px;
+}
+
 body.modal-open {
   overflow: hidden;
 }
@@ -1039,19 +1085,39 @@ body.modal-open {
   }
 
   .timeline-item {
+    width: 100%;
+    margin: 0;
     align-items: flex-start;
   }
 
-  .timeline-stepper {
-    padding-left: 14px;
+  .timeline-item-left,
+  .timeline-item-right {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .timeline-item-left .timeline-copy,
+  .timeline-item-right .timeline-copy {
+    justify-items: start;
   }
 
   .timeline-stepper::before {
-    left: 13px;
+    left: 18px;
+    transform: none;
+  }
+
+  .timeline-connector {
+    text-align: left;
+    margin-left: 22px;
   }
 
   .architecture-title {
     align-items: center;
+  }
+
+  .architecture-notes-list {
+    grid-template-columns: 1fr;
   }
 
   .architecture-modal {

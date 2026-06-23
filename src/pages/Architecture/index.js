@@ -107,11 +107,11 @@ window.createArchitecturePage = function createArchitecturePage() {
               <h3 class="card-heading">What this section shows</h3>
               <p class="card-text">
                 The SVG gives the big-picture flow. The cards below break down the same route into the
-                practical steps I use when explaining the project in interviews.
+                practical steps I used while shaping the delivery flow and build process.
               </p>
               <div class="card-actions">
                 <button class="text-link text-button" type="button" data-open-architecture-diagram>Open diagram</button>
-                <a class="text-link" href="./docs/architecture.md" target="_blank" rel="noreferrer">Read notes</a>
+                <button class="text-link text-button" type="button" data-open-architecture-notes>Open notes</button>
               </div>
             </aside>
           </div>
@@ -170,15 +170,16 @@ window.createArchitecturePage = function createArchitecturePage() {
             <p class="section-label">Release Flow</p>
             <h2 class="section-title">How a release moves</h2>
           </div>
-          <div class="timeline-list timeline-stepper">
+          <div class="timeline-list timeline-stepper timeline-zigzag">
             ${deploymentSteps.map((step, index) => `
-              <div class="timeline-item">
+              <div class="timeline-item ${index % 2 === 0 ? 'timeline-item-left' : 'timeline-item-right'}">
                 <div class="timeline-marker">${String(index + 1).padStart(2, '0')}</div>
                 <div class="timeline-copy">
                   <p class="timeline-step-label">Step ${String(index + 1).padStart(2, '0')}</p>
                   <p>${step}</p>
                 </div>
               </div>
+              ${index < deploymentSteps.length - 1 ? '<div class="timeline-connector" aria-hidden="true">↘</div>' : ''}
             `).join('')}
           </div>
         </section>
@@ -240,16 +241,90 @@ window.createArchitecturePage = function createArchitecturePage() {
         </div>
       </div>
     </div>
+    <div class="architecture-modal" data-architecture-notes-modal hidden aria-hidden="true">
+      <div class="architecture-modal-backdrop" data-close-architecture-notes></div>
+      <div class="architecture-modal-panel architecture-notes-panel" role="dialog" aria-modal="true" aria-labelledby="architecture-notes-title" tabindex="-1">
+        <div class="architecture-modal-header">
+          <div>
+            <p class="meta-label">Architecture Notes</p>
+            <h2 id="architecture-notes-title" class="section-title architecture-modal-title">What the diagram means</h2>
+          </div>
+          <button class="architecture-modal-close" type="button" aria-label="Close notes" data-close-architecture-notes>
+            ×
+          </button>
+        </div>
+        <p class="architecture-modal-copy">
+          These notes explain the same delivery path in plain language, covering the build, packaging,
+          registry, and deployment pieces that sit behind the portfolio.
+        </p>
+        <div class="architecture-notes-list">
+          <article class="card architecture-note-card">
+            <div class="card-stripe"></div>
+            <h3 class="card-heading">Build stage</h3>
+            <p class="card-text">GitHub Actions generates build metadata and packages the site into a Docker image.</p>
+          </article>
+          <article class="card architecture-note-card">
+            <div class="card-stripe"></div>
+            <h3 class="card-heading">Registry stage</h3>
+            <p class="card-text">The image is pushed to Azure Container Registry with the commit SHA as the tag.</p>
+          </article>
+          <article class="card architecture-note-card">
+            <div class="card-stripe"></div>
+            <h3 class="card-heading">Deployment stage</h3>
+            <p class="card-text">Azure App Service pulls the new image, restarts the container, and serves the live site.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div class="architecture-modal" data-architecture-notes-modal hidden aria-hidden="true">
+      <div class="architecture-modal-backdrop" data-close-architecture-notes></div>
+      <div class="architecture-modal-panel architecture-notes-panel" role="dialog" aria-modal="true" aria-labelledby="architecture-notes-title" tabindex="-1">
+        <div class="architecture-modal-header">
+          <div>
+            <p class="meta-label">Architecture Notes</p>
+            <h2 id="architecture-notes-title" class="section-title architecture-modal-title">What the diagram means</h2>
+          </div>
+          <button class="architecture-modal-close" type="button" aria-label="Close notes" data-close-architecture-notes>
+            ×
+          </button>
+        </div>
+        <p class="architecture-modal-copy">
+          These notes explain the same delivery path in plain language, covering the build, packaging,
+          registry, and deployment pieces behind the portfolio.
+        </p>
+        <div class="architecture-notes-list">
+          <article class="card architecture-note-card">
+            <div class="card-stripe"></div>
+            <h3 class="card-heading">Build stage</h3>
+            <p class="card-text">GitHub Actions generates build metadata and packages the site into a Docker image.</p>
+          </article>
+          <article class="card architecture-note-card">
+            <div class="card-stripe"></div>
+            <h3 class="card-heading">Registry stage</h3>
+            <p class="card-text">The image is pushed to Azure Container Registry with the commit SHA as the tag.</p>
+          </article>
+          <article class="card architecture-note-card">
+            <div class="card-stripe"></div>
+            <h3 class="card-heading">Deployment stage</h3>
+            <p class="card-text">Azure App Service pulls the new image, restarts the container, and serves the live site.</p>
+          </article>
+        </div>
+      </div>
+    </div>
   `;
 };
 
 window.setupArchitectureModal = function setupArchitectureModal() {
   const modal = document.querySelector('[data-architecture-modal]');
   const panel = document.querySelector('.architecture-modal-panel');
+  const notesModal = document.querySelector('[data-architecture-notes-modal]');
+  const notesPanel = document.querySelector('.architecture-notes-panel');
   const openButtons = document.querySelectorAll('[data-open-architecture-diagram]');
+  const openNotesButtons = document.querySelectorAll('[data-open-architecture-notes]');
   const closeButtons = document.querySelectorAll('[data-close-architecture-diagram]');
+  const closeNotesButtons = document.querySelectorAll('[data-close-architecture-notes]');
 
-  if (!modal || !openButtons.length || !closeButtons.length) {
+  if (!modal || !notesModal || !openButtons.length || !openNotesButtons.length || !closeButtons.length || !closeNotesButtons.length) {
     return;
   }
 
@@ -266,22 +341,44 @@ window.setupArchitectureModal = function setupArchitectureModal() {
     document.body.classList.remove('modal-open');
   };
 
+  const openNotesModal = () => {
+    notesModal.hidden = false;
+    notesModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    notesPanel?.focus();
+  };
+
+  const closeNotesModal = () => {
+    notesModal.hidden = true;
+    notesModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  };
+
   openButtons.forEach((button) => button.addEventListener('click', openModal));
+  openNotesButtons.forEach((button) => button.addEventListener('click', openNotesModal));
   closeButtons.forEach((button) => button.addEventListener('click', closeModal));
+  closeNotesButtons.forEach((button) => button.addEventListener('click', closeNotesModal));
 
   document.addEventListener('keydown', (event) => {
-    if (modal.hidden) {
-      return;
-    }
-
     if (event.key === 'Escape') {
-      closeModal();
+      if (!modal.hidden) {
+        closeModal();
+      }
+      if (!notesModal.hidden) {
+        closeNotesModal();
+      }
     }
   });
 
   modal.addEventListener('click', (event) => {
     if (event.target === modal) {
       closeModal();
+    }
+  });
+
+  notesModal.addEventListener('click', (event) => {
+    if (event.target === notesModal) {
+      closeNotesModal();
     }
   });
 };
