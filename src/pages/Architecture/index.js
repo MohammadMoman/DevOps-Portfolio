@@ -179,6 +179,9 @@ window.createArchitecturePage = function createArchitecturePage() {
               Build metadata is injected during CI/CD and gives me a simple way to trace which version is
               running, when it was built, and which commit produced it.
             </p>
+            <div class="architecture-actions">
+              <a class="button secondary" href="./status.html">Open Status Page</a>
+            </div>
           </div>
           <div class="cards-grid metadata-grid">
             ${metadataCards.map((item) => `

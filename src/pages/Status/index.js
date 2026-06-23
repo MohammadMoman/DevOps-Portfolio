@@ -33,6 +33,9 @@ window.createStatusPage = function createStatusPage() {
               <strong>${buildInfo.environment}</strong>
             </div>
           </div>
+          <div class="card-actions">
+            <a class="text-link" href="./architecture.html">View architecture</a>
+          </div>
         </section>
       </main>
     </div>
