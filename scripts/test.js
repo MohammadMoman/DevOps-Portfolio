@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 
-const requiredFiles = ['index.html', 'status.html', 'src/config/build-info.js'];
+const requiredFiles = ['index.html', 'status.html', 'architecture.html', 'src/config/build-info.js'];
 
 for (const file of requiredFiles) {
   readFileSync(file, 'utf8');

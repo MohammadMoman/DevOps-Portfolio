@@ -15,7 +15,13 @@ const mimeTypes = {
 
 const server = createServer(async (req, res) => {
   const url = new URL(req.url || '/', `http://${req.headers.host}`);
-  const pathname = url.pathname === '/status' ? '/status.html' : url.pathname === '/' ? '/index.html' : url.pathname;
+  const routeMap = {
+    '/': '/index.html',
+    '/status': '/status.html',
+    '/architecture': '/architecture.html',
+    '/about': '/aboutme.html',
+  };
+  const pathname = routeMap[url.pathname] || url.pathname;
   const filePath = resolve(rootDir, `.${pathname}`);
 
   if (!filePath.startsWith(rootDir)) {
