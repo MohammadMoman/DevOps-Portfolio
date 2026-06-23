@@ -70,7 +70,7 @@ window.createArchitecturePage = function createArchitecturePage() {
             <p class="hero-kicker">Engineering View</p>
             <h1 class="name architecture-title">
               <span>Architecture</span>
-              <span>Delivery Pipeline</span>
+              <span>&amp; Delivery Pipeline</span>
             </h1>
             <div class="divider">
               <div class="div-line"></div>
@@ -90,7 +90,7 @@ window.createArchitecturePage = function createArchitecturePage() {
         <section class="section">
           <div class="architecture-diagram-layout">
             <div class="section-header">
-              <p class="section-label">Architecture Diagram</p>
+              <p class="section-label">Architecture Overview</p>
               <h2 class="section-title">Release path</h2>
               <p class="section-copy">
                 The pipeline starts in GitHub, moves through CI/CD in GitHub Actions, stores images in
@@ -131,7 +131,7 @@ window.createArchitecturePage = function createArchitecturePage() {
 
         <section class="section">
           <div class="section-header">
-            <p class="section-label">Release Notes</p>
+            <p class="section-label">Project Evolution</p>
             <h2 class="section-title">How the project evolved</h2>
             <p class="section-copy">
               A short history of the main improvements that turned this from a portfolio site into a
@@ -167,7 +167,7 @@ window.createArchitecturePage = function createArchitecturePage() {
 
         <section class="section">
           <div class="section-header">
-            <p class="section-label">Deployment Flow</p>
+            <p class="section-label">Release Flow</p>
             <h2 class="section-title">How a release moves</h2>
           </div>
           <div class="timeline-list timeline-stepper">
@@ -205,7 +205,7 @@ window.createArchitecturePage = function createArchitecturePage() {
 
         <section class="section">
           <div class="section-header">
-            <p class="section-label">Why I Built It</p>
+            <p class="section-label">Why I Built This</p>
             <h2 class="section-title">The learning goal</h2>
           </div>
           <article class="card architecture-statement">
