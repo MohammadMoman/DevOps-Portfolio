@@ -97,7 +97,7 @@ window.createArchitecturePage = function createArchitecturePage() {
                 Azure Container Registry, and deploys to Azure App Service before reaching the live website.
               </p>
               <div class="architecture-actions">
-                <a class="button" href="./docs/architecture.svg" target="_blank" rel="noreferrer">Open SVG Diagram</a>
+                <button class="button" type="button" data-open-architecture-diagram>Show Diagram</button>
                 <a class="button secondary" href="./docs/architecture.md" target="_blank" rel="noreferrer">Read Notes</a>
               </div>
             </div>
@@ -110,7 +110,7 @@ window.createArchitecturePage = function createArchitecturePage() {
                 practical steps I use when explaining the project in interviews.
               </p>
               <div class="card-actions">
-                <a class="text-link" href="./docs/architecture.svg" target="_blank" rel="noreferrer">Open diagram</a>
+                <button class="text-link text-button" type="button" data-open-architecture-diagram>Open diagram</button>
                 <a class="text-link" href="./docs/architecture.md" target="_blank" rel="noreferrer">Read notes</a>
               </div>
             </aside>
@@ -220,5 +220,68 @@ window.createArchitecturePage = function createArchitecturePage() {
         </section>
       </main>
     </div>
+    <div class="architecture-modal" data-architecture-modal hidden aria-hidden="true">
+      <div class="architecture-modal-backdrop" data-close-architecture-diagram></div>
+      <div class="architecture-modal-panel" role="dialog" aria-modal="true" aria-labelledby="architecture-modal-title" tabindex="-1">
+        <div class="architecture-modal-header">
+          <div>
+            <p class="meta-label">Architecture Diagram</p>
+            <h2 id="architecture-modal-title" class="section-title architecture-modal-title">GitHub to Live Website</h2>
+          </div>
+          <button class="architecture-modal-close" type="button" aria-label="Close diagram" data-close-architecture-diagram>
+            ×
+          </button>
+        </div>
+        <p class="architecture-modal-copy">
+          This diagram shows the delivery path from source control to the live Azure App Service instance.
+        </p>
+        <div class="architecture-modal-frame">
+          <img src="./docs/architecture.svg" alt="Architecture diagram showing GitHub, GitHub Actions, Azure Container Registry, Azure App Service, and Live Website" />
+        </div>
+      </div>
+    </div>
   `;
+};
+
+window.setupArchitectureModal = function setupArchitectureModal() {
+  const modal = document.querySelector('[data-architecture-modal]');
+  const panel = document.querySelector('.architecture-modal-panel');
+  const openButtons = document.querySelectorAll('[data-open-architecture-diagram]');
+  const closeButtons = document.querySelectorAll('[data-close-architecture-diagram]');
+
+  if (!modal || !openButtons.length || !closeButtons.length) {
+    return;
+  }
+
+  const openModal = () => {
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    panel?.focus();
+  };
+
+  const closeModal = () => {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  };
+
+  openButtons.forEach((button) => button.addEventListener('click', openModal));
+  closeButtons.forEach((button) => button.addEventListener('click', closeModal));
+
+  document.addEventListener('keydown', (event) => {
+    if (modal.hidden) {
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
 };

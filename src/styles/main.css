@@ -478,6 +478,19 @@ a {
   color: var(--text);
 }
 
+.text-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.text-button:hover,
+.text-button:focus-visible {
+  color: var(--text);
+}
+
 .project-card .card-text {
   margin-top: 8px;
 }
@@ -878,6 +891,90 @@ a {
   margin-bottom: 16px;
 }
 
+.architecture-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.architecture-modal[hidden] {
+  display: none;
+}
+
+.architecture-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 12, 27, 0.82);
+  backdrop-filter: blur(10px);
+}
+
+.architecture-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, 100%);
+  max-height: min(92vh, 980px);
+  overflow: auto;
+  padding: 22px;
+  border: 1px solid rgba(90, 180, 255, 0.22);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at top left, rgba(90, 180, 255, 0.12), transparent 42%),
+    linear-gradient(180deg, rgba(7, 24, 48, 0.98), rgba(2, 12, 27, 0.98));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.architecture-modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.architecture-modal-title {
+  margin-top: 6px;
+}
+
+.architecture-modal-copy {
+  max-width: 66ch;
+  margin-bottom: 18px;
+  color: var(--text-soft);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.architecture-modal-close {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(90, 180, 255, 0.24);
+  border-radius: 50%;
+  background: rgba(90, 180, 255, 0.08);
+  color: var(--text);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.architecture-modal-frame {
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(90, 180, 255, 0.18);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.architecture-modal-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(22px); }
   to { opacity: 1; transform: translateY(0); }
@@ -955,5 +1052,17 @@ a {
 
   .architecture-title {
     align-items: center;
+  }
+
+  .architecture-modal {
+    padding: 16px;
+  }
+
+  .architecture-modal-panel {
+    padding: 16px;
+  }
+
+  .architecture-modal-header {
+    flex-direction: column;
   }
 }
