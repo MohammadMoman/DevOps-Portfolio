@@ -669,6 +669,10 @@ a {
   min-height: auto;
   padding-top: 18px;
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
 }
 
 .architecture-hero::before {
@@ -728,10 +732,14 @@ a {
 }
 
 .architecture-diagram-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.8fr);
-  gap: 18px;
-  align-items: start;
+  display: block;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.architecture-diagram-layout .section-header {
+  margin: 0 auto;
 }
 
 .badge-row {
