@@ -960,8 +960,8 @@ a {
   position: relative;
   z-index: 1;
   width: min(1120px, 100%);
-  max-height: min(92vh, 980px);
-  overflow: auto;
+  max-height: min(90vh, 920px);
+  overflow: hidden;
   padding: 22px;
   border: 1px solid rgba(90, 180, 255, 0.22);
   border-radius: 16px;
@@ -1008,6 +1008,14 @@ a {
   border-radius: 12px;
   border: 1px solid rgba(90, 180, 255, 0.18);
   background: rgba(255, 255, 255, 0.02);
+  max-height: calc(90vh - 220px);
+  overflow: auto;
+}
+
+.architecture-modal-frame svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .architecture-modal-frame img {
@@ -1018,6 +1026,10 @@ a {
 
 .architecture-notes-panel {
   width: min(1040px, 100%);
+}
+
+.architecture-notes-panel .architecture-modal-frame {
+  display: none;
 }
 
 .architecture-notes-list {
@@ -1143,5 +1155,9 @@ body.modal-open {
 
   .architecture-modal-header {
     flex-direction: column;
+  }
+
+  .architecture-modal-frame {
+    max-height: calc(90vh - 260px);
   }
 }
